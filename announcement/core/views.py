@@ -92,6 +92,7 @@ class AnnouncementView(View):
         super().__init__(timeout=timeout)
         self.ctx: commands.Context = ctx
         self.cog: AnnouncementCog = ctx.cog
+        self.user: discord.Member = ctx.author
         self.message: discord.Message = MISSING
         self.announcement: AnnouncementModel = announcement
         self.confirm: Optional[bool] = None
