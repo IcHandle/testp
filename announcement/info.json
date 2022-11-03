@@ -1,0 +1,11 @@
+{
+    "name": "Announcement",
+    "description": [
+        "Create and post announcements.",
+        "\n**Version:**\n`{0}`"
+    ],
+    "author": "Jerrie-Aries (modifications by Jees1)",
+    "version": "1.1.2",
+    "bot_version": "4.0.0",
+    "dpy_version": "2.0.0"
+}
