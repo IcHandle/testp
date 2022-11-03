@@ -108,13 +108,11 @@ class AnnouncementModel:
         else:
             color = _color_converter(color)
         embed = discord.Embed(description=description, color=color, timestamp=discord.utils.utcnow())
-        author = self.ctx.author
         embed.set_author(name=str(author), icon_url=author.display_avatar)
         if thumbnail_url:
             embed.set_thumbnail(url=thumbnail_url)
         if image_url:
             embed.set_image(url=image_url)
-        embed.set_footer(text="Announcement", icon_url=self.channel.guild.icon)
         self.embed = embed
         return embed
 
