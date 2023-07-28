@@ -22,11 +22,8 @@ class Reports(commands.Cog):
         Report a player.
         """
         try:
-            staffChannel = self.bot.get_channel(686253307278393442)
-            guestChannel = self.bot.get_channel(686253328270884877)
-            if ctx.guild.id == 814758983238942720:
-                staffChannel = self.bot.get_channel(818446997816082432)
-                guestChannel = self.bot.get_channel(818447055810199552)
+            staffChannel = self.bot.get_channel(1059353563173765282)
+            guestChannel = self.bot.get_channel(1059353775095152720)
 
             texta = """**React with the type of your report:**
   1️⃣ | Staff Report
