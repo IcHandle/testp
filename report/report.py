@@ -25,17 +25,17 @@ class Reports(commands.Cog):
             staffChannel = self.bot.get_channel(1059353563173765282)
             guestChannel = self.bot.get_channel(1059353775095152720)
 
-            texta = """**React with the type of your report:**
-  1️⃣ | Staff Report
-  2️⃣ | Guest Report
+            texta = """**Please select an emoji of your report type to continue.**
+  💼 | Staff Report
+  ❗ | Guest Report
   ❌ | Cancel
   """
 
-            embedTimeout = discord.Embed(description="❌ | You took too long! Command cancelled", color=15158332)
+            embedTimeout = discord.Embed(description="Prompt timed out because you're taking too long.", color=15158332)
             embed1 = discord.Embed(description=texta, color=self.bot.main_color)
             embed1.set_footer(text="React with ❌ to cancel")
             reactionmsg = await ctx.send(content=f"<@!{ctx.author.id}>", embed=embed1)
-            for emoji in ('1️⃣', '2️⃣', '❌'):
+            for emoji in ('💼', '❗', '❌'):
                 await reactionmsg.add_reaction(emoji)
 
             def checkmsg(msg: discord.Message):
@@ -52,7 +52,7 @@ class Reports(commands.Cog):
             except asyncio.TimeoutError:
                 return await reactionmsg.edit(embed=embedTimeout)
 
-            if str(reaction.emoji) == '1️⃣':
+            if str(reaction.emoji) == '💼':
                 await reactionmsg.clear_reactions()
 
                 text = "**Staff Report**\nWhat is the username of the user you're reporting? You have 2 minutes to " \
@@ -62,7 +62,7 @@ class Reports(commands.Cog):
                 try:
                     username = await self.bot.wait_for('message', check=checkmsg, timeout=120)
                     if cancel_check(username) is True:
-                        cancelEmbed = discord.Embed(description="❌ | Cancelled report", color=15158332)
+                        cancelEmbed = discord.Embed(description="Report prompt has been cancelled.", color=15158332)
                         await reactionmsg.edit(embed=cancelEmbed)
                         await reactionmsg.clear_reactions()
                         return
@@ -78,7 +78,7 @@ class Reports(commands.Cog):
                 try:
                     rank = await self.bot.wait_for('message', check=checkmsg, timeout=120)
                     if cancel_check(rank) is True:
-                        cancelEmbed = discord.Embed(description="❌ | Cancelled report", color=15158332)
+                        cancelEmbed = discord.Embed(description="Report prompt has been cancelled.", color=15158332)
                         await reactionmsg.edit(embed=cancelEmbed)
                         await reactionmsg.clear_reactions()
                         return
@@ -93,7 +93,7 @@ class Reports(commands.Cog):
                 try:
                     reason = await self.bot.wait_for('message', check=checkmsg, timeout=120)
                     if cancel_check(reason) is True:
-                        cancelEmbed = discord.Embed(description="❌ | Cancelled report", color=15158332)
+                        cancelEmbed = discord.Embed(description="Report prompt has been cancelled.", color=15158332)
                         await reactionmsg.edit(embed=cancelEmbed)
                         await reactionmsg.clear_reactions()
                         return
@@ -109,7 +109,7 @@ class Reports(commands.Cog):
                 try:
                     proof = await self.bot.wait_for('message', check=checkmsg, timeout=600)
                     if cancel_check(proof) is True:
-                        cancelEmbed = discord.Embed(description="❌ | Cancelled report", color=15158332)
+                        cancelEmbed = discord.Embed(description="Report prompt has been cancelled.", color=15158332)
                         await reactionmsg.edit(embed=cancelEmbed)
                         await reactionmsg.clear_reactions()
                         return
@@ -126,11 +126,11 @@ class Reports(commands.Cog):
                     reportEmbed.add_field(name="Proof:", value=proof.content)
                 reportEmbed.set_author(name=ctx.author, icon_url=ctx.author.avatar)
 
-                await staffChannel.send(content="---------------------------", embed=reportEmbed, files=my_files)
-                text = "✅ | The report has successfully been sent!"
+                await staffChannel.send(content="", embed=reportEmbed, files=my_files)
+                text = "Your report has been successfully submited"
                 await reactionmsg.edit(embed=discord.Embed(description=text, color=3066993))
 
-            if str(reaction.emoji) == '2️⃣':
+            if str(reaction.emoji) == '❗':
                 await reactionmsg.clear_reactions()
 
                 text = "**Guest Report**\nWhat is the username of the user you're reporting? You have 2 minutes to " \
@@ -140,7 +140,7 @@ class Reports(commands.Cog):
                 try:
                     username = await self.bot.wait_for('message', check=checkmsg, timeout=120)
                     if cancel_check(username) is True:
-                        cancelEmbed = discord.Embed(description="❌ | Cancelled report", color=15158332)
+                        cancelEmbed = discord.Embed(description="Report prompt has been cancelled.", color=15158332)
                         await reactionmsg.edit(embed=cancelEmbed)
                         await reactionmsg.clear_reactions()
                         return
@@ -156,7 +156,7 @@ class Reports(commands.Cog):
                 try:
                     reason = await self.bot.wait_for('message', check=checkmsg, timeout=120)
                     if cancel_check(reason) is True:
-                        cancelEmbed = discord.Embed(description="❌ | Cancelled report", color=15158332)
+                        cancelEmbed = discord.Embed(description="Report prompt has been cancelled.", color=15158332)
                         await reactionmsg.edit(embed=cancelEmbed)
                         await reactionmsg.clear_reactions()
                         return
@@ -172,7 +172,7 @@ class Reports(commands.Cog):
                 try:
                     proof = await self.bot.wait_for('message', check=checkmsg, timeout=600)
                     if cancel_check(proof) is True:
-                        cancelEmbed = discord.Embed(description="❌ | Cancelled report", color=15158332)
+                        cancelEmbed = discord.Embed(description="Report prompt has been cancelled.", color=15158332)
                         await reactionmsg.edit(embed=cancelEmbed)
                         await reactionmsg.clear_reactions()
                         return
@@ -187,8 +187,8 @@ class Reports(commands.Cog):
                     reportEmbed.add_field(name="Proof:", value=proof.content)
                 reportEmbed.add_field(name="Reason:", value=reason.content)
                 reportEmbed.set_author(name=ctx.author, icon_url=ctx.author.avatar)
-                await guestChannel.send(content="---------------------------", embed=reportEmbed, files=my_files)
-                text = "✅ | The report has successfully been sent!"
+                await guestChannel.send(content="", embed=reportEmbed, files=my_files)
+                text = "Your report has been submited"
                 await reactionmsg.edit(embed=discord.Embed(description=text, color=3066993))
 
             if str(reaction.emoji) == '❌':
